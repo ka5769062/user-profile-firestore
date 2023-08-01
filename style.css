@@ -1,0 +1,200 @@
+@font-face {
+    font-family: poppins;
+    src: url(icons/Poppins-Medium.ttf);
+}
+
+
+*{
+
+    margin: 0 auto;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: poppins;
+
+}
+
+body{
+
+    background-image: linear-gradient(to right, #5ECDDE ,#D23AF5);
+    /* background-image: url('shubham-dhage-t0Bv0OBQuTg-unsplash.jpg'); */
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    object-fit: contain;
+}
+
+
+.container{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    margin-top: 40px;
+    /* padding: 20px; */
+    background:white;
+    height: 500px;
+    width: 70%;
+    border-radius: 10px;
+    border: 2px solid #ffffff90;
+    backdrop-filter: blur(9px);
+    box-shadow: 0 0 18px #ffffff90;
+    transition:  height 0.3s ease;
+}
+
+
+#email{
+
+ margin-top: 30px;
+
+
+}
+
+form {
+
+ margin: 20px;
+
+
+}
+
+
+#reg{
+
+    text-align: center;   
+    margin: 30px;
+    cursor: pointer;
+    width: 50%;
+    height: 45px;
+    border-radius: 40px;
+    font-size: 7px;
+    background-image: linear-gradient(to right, #5ECDDE ,#D23AF5);
+    color: white;
+    border: 0;
+    
+
+
+}
+
+#logn{
+   
+ text-align: center;   
+ margin: 30px;
+ cursor: pointer;
+ width: 50%;
+ height: 45px;
+ border-radius: 40px;
+ font-size: 7px;
+ background-image: linear-gradient(to right, #5ECDDE ,#D23AF5);
+ color: white;
+ border: 0;
+ /* display: block; */
+}
+
+.icons{
+
+    font-size: 30px;
+
+}
+
+.ptag{
+
+margin: 20px;
+
+    }
+
+.signup{
+
+padding: 20px;
+
+  }
+
+.container .formContainer-Registertion{
+
+ position: absolute;
+ transform: none;
+ transform: translateX(470px);
+
+}
+
+.container .formContainer{
+
+    transform: translateX(0);
+    transition: transform 0.18s ease;
+}
+
+
+.container.active {
+    
+    height: 540px;
+}
+
+.container.active .formContainer{
+
+    transform: translateX(-470px);
+    /* transition: none; */
+
+
+}
+
+.container.active .formContainer-Registertion{
+
+    transform: translateX(0);
+     transition: transform 0.18s ease;
+}
+
+#name {
+
+    margin: 5px;
+
+}
+
+
+#emal {
+
+    margin: 5px;
+
+}
+
+
+#passwrd {
+
+    margin: 5px;
+
+}
+
+
+#Pro {
+
+    margin: 8px;
+
+}
+
+
+button{
+
+width: 40px;
+height: 40px;
+/* color: black; */
+/* display: none; */
+}
+
+img{
+
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#verification{
+
+text-align: center;
+
+}

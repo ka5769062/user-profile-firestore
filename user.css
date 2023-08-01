@@ -1,0 +1,60 @@
+body{
+
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+
+}
+
+.container{
+display: flex;
+
+}
+
+.user{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border-radius: 5px;
+    width: 50%;
+    height: 80vh;
+    background-image: linear-gradient(to right, #5ECDDE ,#D23AF5);
+/* position: relative; */
+
+}
+/* 
+.userimg{
+
+border-radius: 100%;
+background-color: white;
+width: 100px;
+height: 100px;
+position: absolute;
+top: 20%;
+left: 40%;
+} */
+
+.userimg{
+    position: relative;
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    border-radius: 20%;
+    
+}
+
+
+.userimg i {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    font-size: 60px;
+}
+
+i{
+    
+width: 100px;
+
+}
+
