@@ -1,183 +1,181 @@
-
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-  import { getFirestore, collection, doc, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
-
+  import { getAuth, createUserWithEmailAndPassword,sendEmailVerification,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"
+  import { getFirestore,addDoc,collection } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyDjLadaiAYSPkW_1wztdnj1r7PzDLCcOTk",
-    authDomain: "profile-card-firestore.firebaseapp.com",
-    projectId: "profile-card-firestore",
-    storageBucket: "profile-card-firestore.appspot.com",
-    messagingSenderId: "927702634240",
-    appId: "1:927702634240:web:2c6d246d2bdb07c2182de5",
-    measurementId: "G-LKQ1HE0YRE"
+    apiKey: "AIzaSyBtKcXoexkRLaoVYqIgfOZ5rJi5Cvkgf8I",
+    authDomain: "my-user-data.firebaseapp.com",
+    projectId: "my-user-data",
+    storageBucket: "my-user-data.appspot.com",
+    messagingSenderId: "561168824717",
+    appId: "1:561168824717:web:171fa0a3e816078599e5c4",
+    measurementId: "G-RVDN5RM2M6"
   };
 
   const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const db = getFirestore(app);
+
  
-  const db = getFirestore()
-
-
-
-
-  // register
-
-
-
+ // register
+ 
   let reg = document.getElementById("reg")
   
   reg.addEventListener("click", function(){
     
   let email =document.getElementById("emaail").value
-  let name =document.getElementById("name").value
   let password =document.getElementById("passwoord").value
-  let prof =document.getElementById("prof").value
-  
-  register (email,name,password,prof)
-  
-  console.log(email)
-  })
-  
-  
-  async function register(email,name,password,prof){
+  let name =document.getElementById("nme").value
+  let prf =document.getElementById("prof").value
 
-    try {
-      const docRef = await addDoc(collection(db, "users"), {
-      
-       first: email,
-       second: name,
-       password: password,
-       profession:prof 
-       });
-       console.log("Document written with ID: ", docRef.id);
-     } catch (e) {
-       console.error("Error adding document: ", e);
-     }
-  }
+
+  // let  userData = {
+
+  //   userEmail:email,
+  //   userPassword :password,
+  //   userName: name,
+  //   userPrf :prf
+  //  }
+
+
+
+  createUserWithEmailAndPassword(auth,email,password,name,prf)
+    .then(async (userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log("registertion succesful",user)
+
+      try {
+        const docRef = await addDoc(collection(db, "users"), {
+          email: email,
+          password: password,
+          name: name,
+          prf:prf
+
+
+        });
+        console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+  
+
+      swal({
+           icon: "success",
+           text:"registered sucessfully"
+        });
+
+        emailVeri()
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+     console.log("registertion failed",errorMessage)
+     swal({
+         icon: "error",
+         text:"registeration failed"
+      });
+    });
+
 
     
+})    
     
-  
+    
+    
+// email verification
 
-
-
-
-
-
-
-// createUserWithEmailAndPassword(auth, email,password)
-//     .then((userCredential) => {
-//       // Signed in 
-//       const user = userCredential.user;
-      
-//       // swal({
-//       //   icon: "success",
-//       //   text:"registered sucessfully"
-//       // });
-      
-//       console.log("sucessful",user)
-
-      
-
-//       emailVeri()
-//       // ...
-//     })
-//     .catch((error) => {
-//       const errorCode = error.code;
-//       const errorMessage = error.message;
-     
-//       console.log("error",errorMessage)
-//       // swal({
-//       //   icon: "error",
-//       //   text:"registeration failed"
-//       // });
-     
-//       // ..
-//     });
-
-//   })
-
-// // email verification
-
-// function emailVeri(){
+function emailVeri(){
 
   
-//   sendEmailVerification(auth.currentUser)
-//   .then(() => {
+  sendEmailVerification(auth.currentUser)
+  .then(() => {
 
-//   let kam = document.getElementById('verification')
-//   kam.innerHTML = "An Email Verification link has been to your email address "
-//   let img =  document.createElement("img")
-//   kam.appendChild(img)
-//   img.src = "cross.png"
+  let kam = document.getElementById('verification')
+  kam.innerHTML = "An Email Verification link has been to your email address "
+  let img =  document.createElement("img")
+  kam.appendChild(img)
+  img.src = "cross.png"
   
-//   // Email verification sent!
-//     // ...
-//   });
+  // Email verification sent!
+    // ...
+  });
   
-// }
+}
 
-
-//  let delDiv =  document.getElementById("verification")
-//  delDiv.addEventListener("click",function (){
+ let delDiv =  document.getElementById("verification")
+ delDiv.addEventListener("click",function (){
    
-//    delDiv.parentNode.removeChild(delDiv);
+   delDiv.parentNode.removeChild(delDiv);
 
 
-//  })
-
-
-
+ })
 
 
 
 
+  // LOGIN
 
-//   // LOGIN
-
-//  let logn = document.getElementById("logn")
+ let logn = document.getElementById("logn")
   
-//  logn.addEventListener("click",function(){
+ logn.addEventListener("click",function(){
 
-//  let email =  document.getElementById("email").value
-//  let password =  document.getElementById("password").value
+ let email =  document.getElementById("email").value
+ let password =  document.getElementById("password").value
 
 
-//  signInWithEmailAndPassword(auth, email, password)
-//  .then((userCredential) => {
-//    // Signed in 
-//    const user = userCredential.user;
+ signInWithEmailAndPassword(auth,email,password)
+ .then((userCredential) => {
+   // Signed in 
+   const user = userCredential.user;
  
-//   // swal({
-//   //   icon: "success",
-//   //   text:"loged in sucessfully"
-//   // });
+  swal({
+    icon: "success",
+    text:"loged in sucessfully"
+  });
 
-//   setTimeout(() => {
-//     window.location.href = "user.html"
+  setTimeout(() => {
+    window.location.href = "user.html"
     
-//   }, 2000);
+  }, 2000);
 
 
-//    console.log( "succesful login",user)
-//    // ...
+   console.log( "succesful login",user)
+   // ...
 
-//   })
-//  .catch((error) => {
-//    const errorCode = error.code;
-//    const errorMessage = error.message;
-//   //  swal({
-//   //   icon: "error",
-//   //   text:"loged in failed"
-//   // });
-//    console.log( "failed login",errorMessage)
-//  });
+  })
 
 
-//  })
+ .catch((error) => {
+   const errorCode = error.code;
+   const errorMessage = error.message;
+   swal({
+    icon: "error",
+    text:"loged in failed"
+  });
+   console.log( "failed login",errorMessage)
+ });
+
+
+ })
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // FOR CSS
 
 let container = document.querySelector('.container')
 let regBtn = document.querySelector('.regBtn')
@@ -186,9 +184,6 @@ let loginBtn = document.querySelector('.loginBtn')
 // let  paswrd = document.getElementById('paswrd').value
 
 
-
-
-// // FOR CSS
 
 loginBtn.addEventListener("click",function(){
 
@@ -203,9 +198,5 @@ regBtn.addEventListener("click",function(){
 
   
 })
-
-
-
-
 
 
