@@ -29,16 +29,6 @@
   let prf =document.getElementById("prof").value
 
 
-  // let  userData = {
-
-  //   userEmail:email,
-  //   userPassword :password,
-  //   userName: name,
-  //   userPrf :prf
-  //  }
-
-
-
   createUserWithEmailAndPassword(auth,email,password,name,prf)
     .then(async (userCredential) => {
       // Signed in 
