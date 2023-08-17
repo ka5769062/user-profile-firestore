@@ -16,7 +16,7 @@
   const auth = getAuth();
   const db = getFirestore(app);
 
- 
+  const emailVerification = false
  // register
  
   let reg = document.getElementById("reg")
@@ -106,9 +106,11 @@ function emailVeri(){
 
   // LOGIN
 
- let logn = document.getElementById("logn")
+
+    
+  let logn = document.getElementById("logn")
   
- logn.addEventListener("click",function(){
+  logn.addEventListener("click",function(){
 
  let email =  document.getElementById("email").value
  let password =  document.getElementById("password").value
@@ -118,18 +120,18 @@ function emailVeri(){
  .then((userCredential) => {
    // Signed in 
    const user = userCredential.user;
- 
-  swal({
-    icon: "success",
-    text:"loged in sucessfully"
-  });
-
-  setTimeout(() => {
-    window.location.href = "user.html"
+   
+   swal({
+     icon: "success",
+     text:"loged in sucessfully"
+    });
     
-  }, 2000);
-
-
+    setTimeout(() => {
+      window.location.href = "user.html"
+      
+    }, 2000);
+    
+    
    console.log( "succesful login",user)
    // ...
 
@@ -148,18 +150,6 @@ function emailVeri(){
 
 
  })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

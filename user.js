@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-import { getAuth,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"
-import { getFirestore,collection, getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js"; 
+import { getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"
+import { getFirestore,collection,doc,getDoc,getDocs } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js"; 
 
 
 
@@ -21,7 +21,7 @@ const db = getFirestore(app);
 
   
 
-// let email =document.getElementById("emaail").value
+  // let email =document.getElementById("emaail").value
   // let password =document.getElementById("passwoord").value
   // let name =document.getElementById("nme").value
   // let prf =document.getElementById("prof").value
@@ -33,68 +33,71 @@ const db = getFirestore(app);
  lgout.addEventListener("click",() =>{
    
    const user = auth.currentUser;
+   
    if (user) {
      
      window.location.href = "index.html"
      
     } 
- else {
-   // No user is signed in.
+    else {
+      // No user is signed in.
+    }
+    
+  })
+
+
+  
+  getData()
+ 
+ 
+  async function getData(){
+ 
+    //  console.log(getData)
+    const querySnapshot = await getDocs(collection(db, "users"));
+     querySnapshot.forEach((doc) => {
+      let kamran = (`${doc.data().email}`);
+      let kamran1 = (`${doc.data().name}`);
+      let kamran2 = (`${doc.data().prf}`);
+  
+      
+      let UserDataFirst =  document.getElementById('myemail')
+      UserDataFirst.innerHTML = kamran
+  
+          
+      let UserDataSecond =  document.getElementById('myname')
+      UserDataSecond.innerHTML = kamran1
+  
+     let UserDataThird = document.getElementById('myprofesion')
+     UserDataThird.innerHTML = kamran2
+  
+  
+  
+  
+    });
   }
+
+
+
+ 
+ 
+ 
+// async function getData (){
+
   
-})
-
-
-// LOGIN
-
-
-let logn = document.getElementById("logn")
-
-logn.addEventListener("click",function(){
-  
-  let email =  document.getElementById("email").value
-  let password =  document.getElementById("password").value
-  
-  
-  signInWithEmailAndPassword(auth,email,password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
+//   const docRef = doc(db, "users", uid);
+//   const docSnap = await getDoc(docRef);
     
-    swal({
-      icon: "success",
-      text:"loged in sucessfully"
- });
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
 
- setTimeout(() => {
-   window.location.href = "user.html"
-   
-  }, 2000);
-  
-  
-  console.log( "succesful login",user)
-  // ...
-  
-  
-})
-
-
-.catch((error) => {
-  const errorCode = error.code;
-  const errorMessage = error.message;
-  swal({
-    icon: "error",
-    text:"loged in failed"
-  });
-  console.log( "failed login",errorMessage)
-});
-
-
-})
+// } else {
+//   // docSnap.data() will be undefined in this case
+//   console.log("No such document!");
+// }
 
 
 
-document.getElementById('myemail').innerText = "ajmal"
+// }
 
 
 
@@ -102,21 +105,14 @@ document.getElementById('myemail').innerText = "ajmal"
 
 
 
-getData()
 
 
 
-//  GET DATA
 
-async function getData(){
-   
-   console.log(getData)
-  const querySnapshot = await getDocs(collection(db, "users"));
-   querySnapshot.forEach((doc) => {
-    let kamran = (`${doc.data().UserEmail}`);
-     
-    showName.innerHTML +=kamran
-    
-    
-  });
-}
+
+
+
+
+
+
+
